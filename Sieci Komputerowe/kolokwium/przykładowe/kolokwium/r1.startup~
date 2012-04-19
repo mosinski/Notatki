@@ -1,0 +1,4 @@
+/sbin/ifconfig eth1 10.0.17.1 netmask 255.255.255.0 up
+/sbin/ifconfig eth0 10.0.11.1 netmask 255.255.255.248 broadcast 10.0.11.7 up
+route add default gw 10.0.11.2 dev eth0
+

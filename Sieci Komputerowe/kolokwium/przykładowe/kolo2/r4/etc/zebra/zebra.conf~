@@ -1,0 +1,14 @@
+! -*- zebra -*-
+!
+! zebra configuration file
+!
+hostname zebra-r4
+password zebra
+enable password zebra
+!
+! Static default route sample.
+!
+ip route 10.0.7.0/24 10.0.3.1
+!
+log file /var/log/zebra/zebra.log
+

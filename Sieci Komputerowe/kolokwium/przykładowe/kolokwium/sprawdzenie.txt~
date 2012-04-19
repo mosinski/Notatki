@@ -1,0 +1,43 @@
+﻿NA PC 1 
+Sprawdzamy wyjście w świat:
+poleceniem 
+ping 192.168.0.1
+odpowiada nam GW 10.0.16.1
+sprawdzamy czy widzimy pc2
+poleceniem 
+ping 10.0.18.2
+odpowiada
+sprawdzamy dostępność do routera r4
+ping 10.0.14.2
+odpowiada
+sprawdzamy dostępność routera r3
+ping 10.0.12.2
+odpowiada
+
+NA PC 2
+
+Sprawdzamy czy widzimy PC 1 (nie konieczne gdyż szly odpowiedzi od PC2 na PC1 ale sprawdzamy)
+ping 10.0.17.2
+odpowiada
+
+sprawdzamy r3
+ping 10.0.13.1
+odpowiada
+
+sprawdzamy r4
+ping 10.0.13.2
+odpowiada
+
+NA GW
+
+sprawdzamy 
+PC1 
+ping 10.0.17.2
+odpowiada
+
+PC2
+ping 10.0.18.2
+odpowiada
+
+aby byc pewny ze wszystko dziala nalezy z jednego pc1 lub pc2 
+poleceniem ping sprawdzic kazdy ip w sieci :))))))
