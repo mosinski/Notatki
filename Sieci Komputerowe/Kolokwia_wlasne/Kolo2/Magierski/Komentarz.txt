@@ -1,0 +1,95 @@
+Treœæ zadania
+Sieæ A ip 10.0.X.0 /24
+Sieæ B ip 10.0.X+1.0 /24
+X - to numer stanowiska (w moim przypadku by³o to 1)
+
+Schemat sieci
+serwer
+B - sieæ B
+router
+A - Sieæ A
+pc1 pc2
+
+Domena lokalna miala siê nazywac local(3-4 litery nazwiska)
+
+Pliki Startup
+pc1 i pc2 zostaja takie jak w katalogu.
+
+S1
+
+ifconfig eth0 10.0.2.2 netmask 255.255.255.0 broadcast 10.0.1.255 up - IP ja przyjalem ¿e router zawsze ma 1 kolejne urzadzenia maja kolejne numery/maske wpisujesz wedle numeracji, w zadaniu by³a /24 i taka jest tak samo broadcast wedle wzoru w opisie kolosa 1 co da³ nam seba.
+route add default gw 10.0.1.1 dev eth0 - IP - wpisujesz IP routera które nada³eœ mu w sieci A
+/etc/init.d/bind start - ta linijka bez zmian
+
+R1
+
+ifconfig eth0 10.0.1.1 netmask 255.255.255.0 broadcast 10.0.1.255 up - IP w sieci A dla routera, maska i bradcast w zaleznoœci od wartoœci w zadaniu
+ifconfig eth1 10.0.2.1 netmask 255.255.255.0 broadcast 10.0.2.255 up - IP w sieci B dla routera, maska i bradcast w zaleznoœci od wartoœci w zadaniu
+/etc/init.d/dhcp3-server start - bez zmian
+
+Tu siê koñczy zabawa w plikach startup.
+
+Pliki konfiguracyjne
+
+S1
+
+S1/etc/resolv.conf
+
+nameserver 10.0.2.2 - Ip serwera z pliku startup
+search localmag - zamiast mag wpisujecie swoje oznaczenie, pamietajcie ¿e w zadaniu bedzie dok³adnie opisane jak nalezy nazwac te czesc
+
+S1/etc/bind/named.conf
+
+
+Interesuje nas ostania sekcja
+
+zone "localmag" {
+        type master;
+        file "/etc/bind/db.localmag";
+};
+
+Wszystkie "mag" zamieniacie na w³asne oznaczenie jak w poprzednim pliku
+
+
+
+S1/etc/bind/db.localmag
+
+Wszystkie "mag" zamieniacie na w³asne oznaczenie jak w poprzednim pliku
+Pozatym wpisujecie IP serwera oraz oba IP routera z sieci Ai B.
+
+server          IN      A       10.0.2.2
+routerA         IN      A       10.0.1.1
+routerB         IN      A       10.0.2.1
+
+Na koniec zmieniacie mag w nazwie pliku!!!! na to samo co macie tam mieæ jak w poprzednich plikach.
+
+
+R1
+
+R1/etc/resolv.conf
+
+nameserver 10.0.2.2 - IP serwera
+search labnet - tego wpisu nie jestem pewien ale go zostawi³em jak by³.
+
+R1/etc/dhcp3/dhcpd.conf
+
+subnet 10.0.1.0 netmask 255.255.255.0 - wpisujecie ip i maske sieci A (siec miedzy routerem a pctami, bo tam ma dzia³aæ dhcp)
+{
+    range 10.0.1.2 10.0.1.254; - zasiêg ip sieci które bêd¹ przydzielane, minimalny ip jest zawsze o jeden wyzszy niz najnizsze ip które nadaliœcie w sieci, maksymalny ip jest zawsze o jeden mniejszy od adresu rozg³oszeniowego (adres broadcast w pliku startup na routurze w sieci A w naszym przypadku)
+    default-lease-time 600;
+    max-lease-time 7200;
+}
+
+
+Jesli to wszystko zrobicie poprawnie to startujecie laba 
+lstart s1 r1 pc1 pc2 itd.. - serwer i routery zawsze przed pecetami.
+
+Ja nie wrzuci³em plików konfiguracyjnych serwera do archiwum i dlatego mia³em 3, sadze jak to wszystko by³o by zdane to bêdzie 4, zreszta zobaczymy na poprawie :)
+
+Jak mozecie to odpalcie te laboratorium na netkicie i sprawdzcie czy bangla.
+Numer macie wiec w razie pytañ dzwonic.
+
+No i kurwa zacz¹³em to kumac jego twoja mac :)
+
+
+

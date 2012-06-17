@@ -1,0 +1,12 @@
+$TTL    60000
+@               IN      SOA     server.localmag.        root.server.localmag. (
+                        2006031201 ; serial
+                        28 ; refresh
+                        14 ; retry
+                        3600000 ; expire
+                        0 ; negative cache ttl
+                        )
+@               IN      NS      ns.localmag.
+server          IN      A       10.0.2.2
+routerA         IN      A       10.0.1.1
+routerB         IN      A       10.0.2.1

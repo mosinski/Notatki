@@ -1,0 +1,12 @@
+$TTL    60000
+@               IN      SOA     server.localmil.        root.server.localmil. (
+                        2006031201 ; serial
+                        28 ; refresh
+                        14 ; retry
+                        3600000 ; expire
+                        0 ; negative cache ttl
+                        )
+@               IN      NS      ns.localmil.
+server          IN      A       10.0.7.2
+routerA         IN      A       10.0.6.1
+routerB         IN      A       10.0.7.1

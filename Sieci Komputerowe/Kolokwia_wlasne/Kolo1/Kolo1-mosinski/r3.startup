@@ -1,0 +1,4 @@
+ifconfig eth0 10.0.3.194/30 up
+ifconfig eth1 10.0.3.225/30 up
+/etc/init.d/zebra start
+#route add -net 10.0.2.0/24 gw 10.0.3.226
